@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoodMind Tara</title>
+    <meta name="description" content="GoodMind Tara - Voice assistant" />
+    <meta name="author" content="GoodMind" />
+
+    <!-- Favicon / Icons -->
+    <link rel="icon" href="/logo-removebg-preview.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/logo-removebg-preview.png" />
+
+    <meta property="og:title" content="GoodMind Tara" />
+    <meta property="og:description" content="GoodMind Tara - Voice assistant" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/logo-removebg-preview.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@goodmind" />
+    <meta name="twitter:image" content="/logo-removebg-preview.png" />
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#556B2F" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="GoodMind Tara" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-TileColor" content="#556B2F" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    
+    <!-- PWA Icons -->
+    <link rel="apple-touch-icon" href="/logo-removebg-preview.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo-removebg-preview.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo-removebg-preview.png" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- WebView specific meta tags -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Security and compatibility -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    
+    <!-- Content Security Policy for WebView compatibility -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data: https://*.11labs.io https://*.vercel.app https://*.googleapis.com https://apis.google.com https://checkout.razorpay.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: blob: https:;
+      media-src 'self' blob: https:;
+      connect-src 'self' https://*.11labs.io https://*.vercel.app https://*.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://apis.google.com https://checkout.razorpay.com https://*.razorpay.com https://api.razorpay.com wss: ws:;
+      frame-src 'self' https: https://checkout.razorpay.com;
+    " />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('✅ PWA Service Worker registered successfully:', registration.scope);
+            })
+            .catch((error) => {
+              console.log('❌ PWA Service Worker registration failed:', error);
+            });
+        });
+      }
+      
+      // PWA Install Prompt
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        // Show custom install button if needed
+        const installButton = document.getElementById('pwa-install-button');
+        if (installButton) {
+          installButton.style.display = 'block';
+          installButton.addEventListener('click', () => {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+              if (choiceResult.outcome === 'accepted') {
+                console.log('✅ PWA installed successfully');
+              }
+              deferredPrompt = null;
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

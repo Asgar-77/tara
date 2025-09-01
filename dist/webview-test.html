@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebView Test - ElevenLabs Voice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+        .test-item {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+        .success { border-color: #4CAF50; }
+        .error { border-color: #f44336; }
+        .warning { border-color: #ff9800; }
+        .info { border-color: #2196F3; }
+    </style>
+</head>
+<body>
+    <h1>WebView Compatibility Test</h1>
+    <p>This page helps diagnose issues with WebView compatibility for the ElevenLabs Voice app.</p>
+    
+    <div id="results"></div>
+    
+    <script>
+        const results = document.getElementById('results');
+        
+        function addTest(name, test, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-item ${type}`;
+            div.innerHTML = `<strong>${name}:</strong> ${test}`;
+            results.appendChild(div);
+        }
+        
+        // Test WebView detection
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const isWebView = /(WebView|wv)/i.test(userAgent) || 
+                         /(FB_IAB|FBAN|FBIOS)/i.test(userAgent) ||
+                         /(Instagram|Line|Snapchat|Pinterest)/i.test(userAgent) ||
+                         /(CriOS|FxiOS|OPiOS|mercury)/i.test(userAgent);
+        
+        addTest('WebView Detected', isWebView ? 'Yes' : 'No', isWebView ? 'warning' : 'success');
+        addTest('User Agent', userAgent, 'info');
+        
+        // Test WebRTC support
+        const hasMediaDevices = !!navigator.mediaDevices;
+        const hasGetUserMedia = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+        
+        addTest('MediaDevices API', hasMediaDevices ? 'Available' : 'Not Available', hasMediaDevices ? 'success' : 'error');
+        addTest('getUserMedia', hasGetUserMedia ? 'Available' : 'Not Available', hasGetUserMedia ? 'success' : 'error');
+        
+        // Test HTTPS
+        const isHTTPS = location.protocol === 'https:';
+        addTest('HTTPS', isHTTPS ? 'Yes' : 'No', isHTTPS ? 'success' : 'error');
+        
+        // Test microphone permission
+        if (hasGetUserMedia) {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(() => {
+                    addTest('Microphone Permission', 'Granted', 'success');
+                })
+                .catch((error) => {
+                    addTest('Microphone Permission', `Denied: ${error.name}`, 'error');
+                });
+        } else {
+            addTest('Microphone Permission', 'Cannot test - getUserMedia not available', 'error');
+        }
+        
+        // Test WebSocket support
+        const hasWebSocket = typeof WebSocket !== 'undefined';
+        addTest('WebSocket Support', hasWebSocket ? 'Available' : 'Not Available', hasWebSocket ? 'success' : 'error');
+        
+        // Test fetch API
+        const hasFetch = typeof fetch !== 'undefined';
+        addTest('Fetch API', hasFetch ? 'Available' : 'Not Available', hasFetch ? 'success' : 'error');
+        
+        // Test localStorage
+        const hasLocalStorage = typeof localStorage !== 'undefined';
+        addTest('LocalStorage', hasLocalStorage ? 'Available' : 'Not Available', hasLocalStorage ? 'success' : 'error');
+        
+        // Test screen dimensions
+        addTest('Screen Width', `${window.screen.width}px`, 'info');
+        addTest('Screen Height', `${window.screen.height}px`, 'info');
+        addTest('Viewport Width', `${window.innerWidth}px`, 'info');
+        addTest('Viewport Height', `${window.innerHeight}px`, 'info');
+        
+        // Test touch support
+        const hasTouch = 'ontouchstart' in window;
+        addTest('Touch Support', hasTouch ? 'Available' : 'Not Available', hasTouch ? 'success' : 'warning');
+        
+        // Test orientation
+        const orientation = window.screen.orientation ? window.screen.orientation.type : 'Unknown';
+        addTest('Screen Orientation', orientation, 'info');
+        
+        // Test connection info
+        if (navigator.connection) {
+            addTest('Connection Type', navigator.connection.effectiveType || 'Unknown', 'info');
+            addTest('Connection Speed', navigator.connection.downlink ? `${navigator.connection.downlink} Mbps` : 'Unknown', 'info');
+        } else {
+            addTest('Connection Info', 'Not Available', 'warning');
+        }
+        
+        // Add recommendations
+        setTimeout(() => {
+            const recommendations = document.createElement('div');
+            recommendations.className = 'test-item info';
+            recommendations.innerHTML = '<strong>Recommendations:</strong><br>' +
+                '• If WebView is detected, consider opening in a regular browser<br>' +
+                '• Ensure HTTPS is enabled for WebRTC features<br>' +
+                '• Grant microphone permissions when prompted<br>' +
+                '• Check that WebSocket connections are allowed';
+            results.appendChild(recommendations);
+        }, 1000);
+    </script>
+</body>
+</html>

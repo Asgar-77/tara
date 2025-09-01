@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Voice calling design system with modern gradients and colors */
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Voice calling primary - electric blue */
+    --primary: 213 94% 68%;
+    --primary-foreground: 240 10% 3.9%;
+    --primary-glow: 213 100% 78%;
+
+    --secondary: 240 4.8% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 5.9% 10%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 213 94% 68%;
+    --accent-foreground: 240 10% 3.9%;
+
+    /* Voice states */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 240 10% 3.9%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 213 94% 68%;
+
+    /* Voice interface specific */
+    --voice-active: 213 94% 68%;
+    --voice-inactive: 240 5% 64.9%;
+    --voice-listening: 142 76% 36%;
+    --voice-speaking: 38 92% 50%;
+    --voice-error: 0 72% 51%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(213 94% 68%), hsl(213 100% 78%));
+    --gradient-voice: linear-gradient(135deg, hsl(213 94% 68%), hsl(142 76% 36%));
+    --gradient-background: linear-gradient(135deg, hsl(240 10% 3.9%), hsl(240 5.9% 10%));
+
+    /* Shadows and glows */
+    --shadow-voice: 0 0 50px hsl(213 94% 68% / 0.3);
+    --shadow-glow: 0 0 80px hsl(213 100% 78% / 0.4);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 213 94% 68%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 213 100% 78%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 10% 3.9%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 213 94% 68%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 240 10% 3.9%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 213 94% 68%;
+
+    --voice-active: 213 94% 68%;
+    --voice-inactive: 240 3.8% 46.1%;
+    --voice-listening: 142 76% 36%;
+    --voice-speaking: 38 92% 50%;
+    --voice-error: 0 72% 51%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(213 94% 68%), hsl(213 100% 78%));
+    --gradient-voice: linear-gradient(135deg, hsl(213 94% 68%), hsl(142 76% 36%));
+    --gradient-background: linear-gradient(135deg, hsl(0 0% 100%), hsl(240 4.8% 95.9%));
+
+    --shadow-voice: 0 0 50px hsl(213 94% 68% / 0.2);
+    --shadow-glow: 0 0 80px hsl(213 100% 78% / 0.3);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
