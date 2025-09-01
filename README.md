@@ -1,0 +1,159 @@
+# Tara GoodMind Calling - AI Voice Interface
+
+A React-based Progressive Web App (PWA) that provides an AI-powered voice calling interface with Tara GoodMind. Features a beautiful phone-like UI for voice conversations, user authentication, subscription management, and Razorpay payment integration.
+
+## 🚀 Quick Deploy to Netlify
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/GoodMindIndia/tara-calling-with-razorpay)
+
+## 🛠️ Local Development
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- ElevenLabs API key
+- Firebase project
+- Razorpay account
+
+### Setup
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/GoodMindIndia/tara-calling-with-razorpay.git
+cd tara-calling-with-razorpay
+```
+
+2. **Install dependencies**
+```bash
+npm install
+```
+
+3. **Set up environment variables**
+```bash
+# Copy the example environment file
+cp env.example .env
+
+# Edit .env and add your configuration
+VITE_ELEVENLABS_API_KEY=your_elevenlabs_api_key_here
+VITE_AGENT_ID=your_agent_id_here
+VITE_FIREBASE_API_KEY=your_firebase_api_key_here
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_RAZORPAY_KEY_ID=your_razorpay_key_id_here
+```
+
+4. **Start development server**
+```bash
+npm run dev
+```
+
+Visit `http://localhost:4000` to see the app.
+
+## 🌐 Deployment
+
+### Netlify Deployment (Recommended)
+
+1. **Push to GitHub**
+```bash
+git add .
+git commit -m "Initial commit"
+git push origin master
+```
+
+2. **Connect to Netlify**
+- Go to [netlify.com](https://netlify.com)
+- Import your GitHub repository
+- Add environment variables in Netlify dashboard:
+  - `VITE_ELEVENLABS_API_KEY`: Your ElevenLabs API key
+  - `VITE_AGENT_ID`: Your voice agent ID
+  - `VITE_FIREBASE_API_KEY`: Your Firebase API key
+  - `VITE_RAZORPAY_KEY_ID`: Your Razorpay key ID
+
+3. **Deploy**
+- Netlify will automatically build and deploy your app
+- Your app will be available at `https://your-project.netlify.app`
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `VITE_ELEVENLABS_API_KEY` | Your ElevenLabs API key | Yes |
+| `VITE_AGENT_ID` | Voice agent ID | Yes |
+| `VITE_FIREBASE_API_KEY` | Firebase API key | Yes |
+| `VITE_FIREBASE_AUTH_DOMAIN` | Firebase auth domain | Yes |
+| `VITE_FIREBASE_PROJECT_ID` | Firebase project ID | Yes |
+| `VITE_RAZORPAY_KEY_ID` | Razorpay key ID | Yes |
+
+## 🎯 Features
+
+- **🎤 Voice Calling Interface**: Beautiful phone-like UI with Tara GoodMind
+- **📱 Progressive Web App**: Installable, offline-capable, native app experience
+- **🔐 User Authentication**: Firebase-based login and signup system
+- **💳 Subscription Management**: Three-tier subscription plans
+- **💸 Payment Integration**: Live Razorpay payment gateway
+- **📊 Usage Tracking**: Monitor call minutes and subscription status
+- **🎨 Modern UI**: Built with shadcn/ui and Tailwind CSS
+- **🔒 TypeScript**: Full type safety and error handling
+
+## 🛠️ Tech Stack
+
+- **React 18** - UI framework
+- **Vite** - Build tool and dev server
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **shadcn/ui** - UI components
+- **Firebase** - Authentication and database
+- **ElevenLabs API** - Voice AI platform
+- **Razorpay** - Payment gateway
+- **PWA** - Progressive Web App features
+
+## 📱 PWA Features
+
+- **🏠 Installable**: Add to home screen
+- **🌐 Offline Support**: Works without internet
+- **📱 Native App Feel**: Full-screen, no browser UI
+- **⚡ Fast Loading**: Cached resources
+- **🔔 Push Notifications**: Ready for future implementation
+
+## 💳 Subscription Plans
+
+- **Basic Plan**: 1 call - 40 min for ₹249
+- **Pro Plan**: 5 calls - 200 min for ₹1150
+- **Premium Plan**: 10 calls - 400 min for ₹2250
+
+## 🔧 Configuration
+
+### Voice Agent
+Configure your voice agent by setting the `VITE_AGENT_ID` environment variable.
+
+### Firebase Setup
+1. Create a Firebase project
+2. Enable Authentication and Firestore
+3. Add your Firebase configuration to environment variables
+
+### Razorpay Setup
+1. Create a Razorpay account
+2. Get your API keys
+3. Add keys to environment variables
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 🚨 Important Notes
+
+- **API Keys**: Never commit real API keys to version control
+- **Environment Variables**: Use `.env` files for local development
+- **Production**: Set environment variables in your hosting platform
+- **Security**: This app includes proper security headers and CSP configuration
+
+---
+
+**Note**: This project integrates multiple services. Make sure you have valid API keys and sufficient credits for voice calls and payments.
